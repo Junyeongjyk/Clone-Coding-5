@@ -1,0 +1,129 @@
+@charset "utf-8";
+
+/* 구글폰트에서 Noto Sans KR 300/400 과 Public Sans 400 가져옴 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400&family=Public+Sans&display=swap');
+
+/* Reset */
+* {margin: 0;padding: 0;}
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, tbody, tfoot, thead, tr, th, td{margin:0;padding:0;}
+a {color: inherit; text-decoration: inherit;}
+li {list-style: none;}
+address, em, i {font-style: normal;}
+button {background: none; border: none;}
+img {vertical-align: middle;}
+
+/* 영어 폰트 */
+.en {font-family: 'Public Sans', sans-serif;}
+.en2 {font-family: 'SilkSerifLightItalic';} /* 폰트 파일 첨부 */
+
+/* LayOut */
+body {font-family: 'Noto Sans KR', sans-serif; font-size: 16px; line-height: 1.6}
+.wrap {position: relative; margin: 0 auto 5000px; overflow: hidden; background: #000; color: #fff;} /* 마진보톰 3000px 정도 주고 작업해야 편함 */
+/* Header */
+header {position: fixed; z-index: 100; width: 100%; left: 0; top: 0; padding: 30px 60px; box-sizing: border-box;  display: flex; justify-content: space-between;transition: 0.3s; background: rgba(0, 0, 0, 0.5);}
+header.active {transform: translateY(-100%)}
+header .logo {color: #fff}
+header .menuOpen {display: none} /* 반응형 할때 햄버거 메뉴 작업 */
+.gnb ul {display: flex; justify-content: space-between;}
+.gnb ul li {margin-left: 70px}
+.gnb ul li a {display: block; position: relative;}
+
+/* .gnb 호버효과 */
+.gnb ul li a .char {display: inline-block; position: relative;overflow: hidden; color:transparent;}
+.gnb ul li a .char:before, .gnb ul li a .char:after {color:#fff; position: absolute; top:0; left: 0;opacity: 0.6;content: attr(data-char);
+transition: transform 0.35s; transition-delay: calc(30ms * var(--char-index));}
+.gnb ul li a .char:before {transform: translateY(100%);} /*일단 먼저 밑으로 내려준다*/
+.gnb ul li a:hover .char:after {transform: translateY(-100%);}  /*마우소오버했을 때 약간 투명한 글씨 위로 올려준다*/
+.gnb ul li a:hover .char:before {transform: translateY(0%); opacity: 1;}/*마우스오버 했을때 완전한 흰색 컬러 글씨가 올라오게 해준다*/
+
+/* visual */
+.visual {padding-top:115px;  width: 100%; height: 100vh; box-sizing: border-box; position: relative;letter-spacing: -1px;}
+.visual .mainText {font-weight: 400; font-size: 140px; line-height: 1.2; margin:30px 0 150px 60px;  display: inline-block; }
+.visual .mainText p {overflow:hidden; margin-top: -20px;}
+.visual .subText  {margin-left: 20%; }
+.visual .scroll {width: 500px; position:fixed; left: 60px; bottom: 40px;}
+.visual .svgAni {width: 60%; transform: rotate(-10deg);position: absolute;right: -5%; top:12%;}
+
+
+
+/* visual - 텍스트 모션 */
+.visual.motion .mainText p{transform: translate3d(0,0,0)skewY(0deg);overflow: hidden;}
+.visual.motion .mainText p span{display:block; animation-name: textAni; animation-duration: 1.8s;}
+.visual.motion .mainText p:nth-child(2) span{animation-duration: 1.7s;} /* 밑줄 부터 먼저 내려 오도록 빠르게 타이밍 수정  */
+.visual.motion .mainText p:nth-child(3) span{animation-duration: 1.5s;}
+
+@keyframes textAni {
+    0%{opacity: 0;}
+    30%{opacity: 0; transform: translate3d(0,-90px,0)skewY(-10deg); transform-origin: top left;}
+}
+@keyframes textAni2 {
+    0%{opacity: 0;}
+    50%{opacity: 0;}
+}
+.visual.motion .subText {animation-name: textAni2; animation-duration: 2.3s;}
+
+.visual.motion #svgAni01{stroke-dasharray: 282; stroke-dashoffset: 282;animation: ani1  .5s linear 0s forwards;}
+.visual.motion #svgAni02{stroke-dasharray: 2240; stroke-dashoffset: -2240;animation: ani2 1.2s linear 0s forwards;} /* -2240 -> 마이너스로 되어있는건 글씨 애니 방향 때문 */
+.visual.motion #svgAni03{stroke-dasharray: 187; stroke-dashoffset: -187;animation: ani3 .5s linear 0s forwards;}
+.visual.motion #svgAni04{stroke-dasharray: 97; stroke-dashoffset: -97;animation: ani4  .2s linear .1s forwards;}
+@keyframes ani1 { 0% {stroke-dashoffset : 282;} 100% {stroke-dashoffset : 0;} }
+@keyframes ani2 { 0% {stroke-dashoffset : 2240;} 100% {stroke-dashoffset : 0;} }
+@keyframes ani3 { 0% {stroke-dashoffset : 187;} 100% {stroke-dashoffset : 0;} }
+@keyframes ani4 { 0% {stroke-dashoffset : 97;} 100% {stroke-dashoffset : 0;} }
+
+/* con01 */
+.con01 {width: 100vw; height: 100vh; position: relative;}
+.con01 .videoWrap video {width:100vw; height: 100vh;object-fit:cover; position:absolute; left:0; top:0;}
+.con01 .title {position: absolute; width: 100%; left: 0%; top:50%; transform: translateY(-50%); text-align: center; color:#fff;}
+.con01 .title h2 {font-weight: 400; font-size: 80px; letter-spacing: -1px; line-height: 1.2;}
+
+/* con02 - 워크 영역 */
+.con02 .title { width: 100%; height: 100vh;font-size: 170px; line-height: 0.9; text-align: center;  padding-top: 30vh; box-sizing: border-box;}
+.con02 .title .en2 {font-size: 200px}
+.con02 .workList {display: flex; justify-content: space-between; width: 70%; margin: 0 auto;   flex-wrap: wrap; }
+.con02 .workList li {width: 45%;margin-top: 200px}
+.con02 .workList li:nth-child(2n){ margin-top: 0}
+.con02 .workList li a {display: block; position: relative}
+.con02 .workList li a .imgBox img {width: 100%;}
+.con02 .workList li a .textBox h3 {font-weight: normal; font-size: 35px; margin: 20px 0 5px}
+.con02 .workList li a .textBox .info {display: flex; justify-content: space-between; color: #888}
+
+
+
+/* con02 - 워크 영역 호버 효과 */
+.con02 .workList li a .imgBox {position: relative}
+.con02 .workList li a .imgBox:before {content: ''; width: 168px; height: 168px; border-radius: 100%; border: 1px solid #fff; background:  url(../images/readMore2.png) no-repeat center/35px; position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%) rotate(45deg); transition: .3s;   z-index: 1;    opacity: 0}
+.con02 .workList li a .imgBox:after {content: ''; width: 0px; height: 0px; border-radius: 100%;
+    background: #fff url(../images/readMore3.png) no-repeat center/160px; position: absolute;  left: 50%; top: 50%; transform: translate(-50%,-50%);  z-index: 1;    animation-name: spin; animation-duration: 10s; animation-iteration-count: infinite; animation-timing-function: linear; transition: .4s}
+
+@keyframes spin {0% {transform:  translate(-50%,-50%) rotate(0deg)} 100% {transform:  translate(-50%,-50%) rotate(360deg)}}
+.con02 .workList li a:hover .imgBox img  {filter: brightness(40%); transition: .3s}
+.con02 .workList li a:hover .imgBox:before {opacity: 1; z-index: 2}
+.con02 .workList li a:hover .imgBox:after { width: 168px; height: 168px;}
+
+/* con03 */
+.con03 {width: 100%; height: 100vh; position: relative;  margin-top: 200px; margin-bottom: 3000px; background: ;}
+.con03 .textWrap { width: 70%; position: absolute; left: 50%; top:50%; transform: translate(-50%,-50%); z-index: 2; }
+.con03 .textWrap ul li {font-size: 100px; line-height: 1.2; overflow:hidden;}
+.con03 .textWrap ul li .en2 {padding-left:20px}
+.con03 .textWrap .title {font-size: 18px; overflow: hidden;}
+
+.simply-scroll-clip {transform:rotate(5deg) translate(150%, 400px) scale(1.1); opacity: 0; filter:brightness(50%); transition-delay: 0.3s; overflow: hidden;}
+.simply-scroll .simply-scroll-list li{ float:left; width: 400px;}
+.simply-scroll .simply-scroll-list li img {width: 100%;}
+
+.con03 .btnWrap {position: absolute; right:-50%; top:60%; z-index:3; }
+.con03 .btnWrap a {display:block; width: 170px; height: 170px; border-radius: 100%; border:2px solid #fff;box-sizing: border-box; position: relative;transition: 0.5s;}
+.con03 .btnWrap a img {width: 22%;  position: absolute; left: 50%; top:50%; transform: translate(-50%,-50%) rotate(45deg);}
+.con03 .btnWrap a img:nth-child(2) {opacity: 0;}
+.con03 .btnWrap a:before {content: ''; width: 0%; height: 0%; background: red;
+border-radius: 100%;background: #fff url(../images/readMore3.png) no-repeat center/158px; position: absolute; left:50%; top:50%; transform: translate(-50%,-50%);  animation-name: spin;   animation-duration: 10s; animation-iteration-count:infinite; animation-timing-function: linear;transition:.4s; }
+/* hover */
+.con03 .btnWrap a:hover {border-color:transparent;}
+.con03 .btnWrap a:hover img:nth-child(2) {opacity: 1;}
+.con03 .btnWrap a:hover:before {width: 100%; height: 100%;}
+
+/* motion.animation */
+.con03.motion .btnWrap {right:50%; transition: 1.2s;}
+.con03.motion .simply-scroll-clip {transition: 1.2s; transform: rotate(5deg) translate(0, 400px) scale(1.1); opacity: 1; transition-delay: 0.3s;}
+.con03.motion .textWrap p {animation-name: textAni; animation-duration: 1.3s;}
